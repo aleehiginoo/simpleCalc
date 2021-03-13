@@ -3,6 +3,7 @@ package com.example.simplecalc;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btn06 = (Button)findViewById(R.id.button6);
         btn07 = (Button)findViewById(R.id.button7);
         btn08 = (Button)findViewById(R.id.button8);
-        btn09 = (Button)findViewById(R.id.button8);
+        btn09 = (Button)findViewById(R.id.button9);
 
         btnSoma = (Button)findViewById(R.id.buttonsoma);
         btnSub = (Button)findViewById(R.id.buttonsub);
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10);
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -69,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 1;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 2;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -93,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 3;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -105,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 4;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -117,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 5;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -129,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 6;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 7;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 8;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
             }
         });
 
@@ -165,8 +166,65 @@ public class MainActivity extends AppCompatActivity {
                     Result[i] = (Result[i] * 10) + 9;
                     count++;
                 }
-                exibirResultado(); //Troca o resultado na tela
                 Total = 0; //Zera o valor de total para não dar erro
+                exibirResultado(); //Troca o resultado na tela
+            }
+        });
+
+        // botões de ação
+        btnSoma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (i == 1) calcular();
+
+                operator = "soma";
+                proximoNumero();
+            }
+        });
+
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (i == 1) calcular();
+
+                operator = "sub";
+                proximoNumero();
+            }
+        });
+
+        btnMult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (i == 1) calcular();
+
+                operator = "mult";
+                proximoNumero();
+            }
+        });
+
+        btnDiv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (i == 1) calcular();
+
+                operator = "div";
+                proximoNumero();
+            }
+        });
+
+        btnIgual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calcular();
+                Total = 0; //Zera o valor de total para não dar erro
+                count=0;
+            }
+        });
+
+        btnLimp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpar();
             }
         });
     }
@@ -203,20 +261,23 @@ public class MainActivity extends AppCompatActivity {
 
     //Executa as operações
     private void calcular(){
-        double value;
-        switch (operator){
-            //Executa as operações e sai do switch
-            case "soma": Total = (Result[0] + Result[1]); break;
-            case "sub": Total = Result[0] - Result[1]; break;
-            case "div": Total = Result[0] / Result[1]; break;
-            case "mult": Total = Result[0] * Result[1]; break;
-        }
-        //Se for um valor inválido
-        if (Total<INVALID) {
-            Result[0] = Total; //Para executar mais operações
-            Result[1] = 0; //Passa para o segundo valor
-            i = 1;
+        if(i == 1){
+            double value;
+            switch (operator){
+                //Executa as operações e sai do switch
+                case "soma": Total = (Result[0] + Result[1]); break;
+                case "sub": Total = Result[0] - Result[1]; break;
+                case "div": Total = Result[1] == 0 ? Result[0] : Result[0] / Result[1]; break;
+                case "mult": Total = Result[0] * Result[1]; break;
+            }
+            //Se for um valor inválido
+            if (Total<INVALID) {
+                Result[0] = Total; //Para executar mais operações
+                Result[1] = 0; //Passa para o segundo valor
+                i = 1;
+            }
+            
+            exibirResultado(); //Troca o resultado na tela
         }
     }
-
 }
